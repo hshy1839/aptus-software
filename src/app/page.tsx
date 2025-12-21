@@ -11,28 +11,52 @@ import IntegrationsSection from "@/components/sections/IntegrationsSection";
 import FinalCTASection from "@/components/sections/FinalCTASection";
 import BlogPreviewSection from "@/components/sections/BlogPreviewSection";
 
+import Reveal from "@/components/ui/Reveal";
+
 export default function Home() {
   return (
     <>
       <Header />
       <main>
-        <Hero />
-        <LogosStrip />
-        <ShowcaseSync />
-        <FeaturesSection />
+        <Reveal>
+          <Hero />
+        </Reveal>
 
-        <div id="pricing">
-          <PricingSection />
-        </div>
+        <Reveal>
+          <LogosStrip />
+        </Reveal>
 
-        <TestimonialsSection />
+        <Reveal>
+          <ShowcaseSync />
+        </Reveal>
 
-        <div id="integrations">
-          <IntegrationsSection />
-        </div>
+        <Reveal>
+          <FeaturesSection />
+        </Reveal>
 
-        <FinalCTASection />
-        <BlogPreviewSection />
+        <Reveal>
+          <div id="pricing">
+            <PricingSection />
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <TestimonialsSection />
+        </Reveal>
+
+        <Reveal>
+          <div id="integrations">
+            <IntegrationsSection />
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <FinalCTASection />
+        </Reveal>
+
+        <Reveal>
+          <BlogPreviewSection />
+        </Reveal>
       </main>
       <Footer />
     </>
