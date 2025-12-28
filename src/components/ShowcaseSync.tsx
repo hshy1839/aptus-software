@@ -1,84 +1,160 @@
 // src/components/ShowcaseSync.tsx
 import Container from "./Container";
-import Button from "./Button";
+
+type StepTone = "primary" | "muted" | "normal";
+
+type Step = {
+  label: string;
+  emoji: string;
+  tone?: StepTone;
+  sub?: string;
+};
+
+const STEPS: Step[] = [
+  {
+    emoji: "📱",
+    label: "앱·웹·소프트웨어 커스텀 개발",
+    sub: "어떤 아이디어든 현실로 구현하는 전천후 기술력",
+    tone: "primary",
+  },
+  {
+    emoji: "💸",
+    label: "불필요한 거품을 뺀 합리적 비용",
+    sub: "고객사의 예산에 맞춘 최적화된 개발 플랜 제안",
+  },
+  {
+    emoji: "💎",
+    label: "타협하지 않는 압도적 퀄리티",
+    sub: "대충 만들지 않습니다. 결과로 증명하는 완성도",
+  },
+  {
+    emoji: "🤝",
+    label: "처음부터 끝까지 '진짜' 책임감",
+    sub: "잠수나 외면 없는, 든든한 비즈니스 파트너십",
+    tone: "muted",
+  },
+];
 
 export default function ShowcaseSync() {
   return (
-    <section className="py-20">
+    <section className="relative overflow-hidden bg-white py-28 text-neutral-900">
+      {/* subtle background tone */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-neutral-50 to-white" />
+        <div className="absolute inset-0 opacity-[0.04] [background-image:radial-gradient(#000_1px,transparent_1px)] [background-size:20px_20px]" />
+      </div>
+
       <Container>
+        {/* Top headline */}
         <div className="text-center">
-          <p className="text-xs font-semibold tracking-[0.25em] text-black/40">
-            WORK ANYWHERE
+          <p className="text-xs font-semibold tracking-[0.28em] text-neutral-400">
+            OUTSOURCING PARTNER
           </p>
-          <h2 className="mt-3 text-3xl md:text-4xl font-bold tracking-tight">
-            Work from anywhere, <br className="hidden md:block" />
-            stay in sync
+
+          <h2 className="mx-auto mt-4 max-w-4xl text-4xl md:text-6xl font-bold tracking-tight leading-[1.15]">
+           앱, 웹 및 복잡한 프로그램까지,
+            <br className="hidden md:block" />  
+            개발이 필요한 <span className="text-blue-600">모든 순간</span>
+             <br/>앱터스와 함께하세요.
           </h2>
+
+          {/* small dots */}
+          <div className="mt-10 flex items-center justify-center">
+            <div className="flex flex-col items-center gap-2 opacity-50">
+              <span className="h-1 w-1 rounded-full bg-neutral-400" />
+              <span className="h-1 w-1 rounded-full bg-neutral-400" />
+              <span className="h-1 w-1 rounded-full bg-neutral-400" />
+            </div>
+          </div>
         </div>
 
-        <div className="mt-10">
-          <div className="mx-auto max-w-5xl rounded-[32px] border border-black/10 bg-white shadow-[0_25px_80px_rgba(15,23,42,0.14)] overflow-hidden">
-            {/* 상단 여백(원본처럼 카드 안에서 여유) */}
-            <div className="p-8 md:p-10">
-              <div className="grid grid-cols-12 gap-8 items-center">
-                {/* 폰 프리뷰 카드 */}
-                <div className="col-span-12 md:col-span-7">
-                  <div className="rounded-[28px] bg-black/5 p-6">
-                    <div className="mx-auto w-full max-w-[340px] rounded-[26px] bg-white border border-black/10 shadow-sm overflow-hidden">
-                      {/* phone header */}
-                      <div className="h-10 bg-black/5 flex items-center px-4">
-                        <div className="h-2.5 w-20 rounded bg-black/15" />
-                      </div>
+        {/* Two-column content */}
+        <div className="mt-24 grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-20 items-center">
+          {/* Left: WHY block */}
+          <div>
+            <p className="text-xs font-semibold tracking-[0.28em] text-blue-600">
+              WHY
+            </p>
 
-                      {/* phone content */}
-                      <div className="p-4 space-y-3">
-                        <div className="h-3 w-32 rounded bg-black/10" />
-                        <div className="h-3 w-44 rounded bg-black/10" />
-                        <div className="h-24 rounded-xl bg-gradient-to-b from-black/10 to-black/5" />
-                        <div className="grid grid-cols-2 gap-3">
-                          <div className="h-10 rounded-xl bg-black/5" />
-                          <div className="h-10 rounded-xl bg-black/5" />
+            <h3 className="mt-6 text-4xl md:text-5xl font-bold leading-[1.12] tracking-tight">
+  거품은 걷어내고,<br />
+  책임감은 더했습니다
+</h3>
+
+<p className="mt-8 max-w-lg text-base md:text-lg leading-relaxed text-neutral-600">
+  "어디는 안 된다 하고, 어디는 너무 비싸고..."<br />
+  더 이상 고민하지 마세요. 앱터스는 어떤 프로젝트든 <br />
+  합리적인 비용으로 최상의 퀄리티를 약속합니다.
+</p>
+
+            {/* brand signature */}
+            <div className="mt-12 inline-flex items-center gap-3 rounded-full border border-neutral-200 bg-neutral-50 px-4 py-2">
+              <span className="h-2 w-2 rounded-full bg-blue-600" />
+              <span className="text-xs font-semibold tracking-[0.22em] text-neutral-600">
+                APTUS SOFTWARE SOLUTIONS
+              </span>
+            </div>
+          </div>
+
+          {/* Right: vertical roadmap */}
+          <div className="relative mx-auto w-full max-w-md">
+            {/* vertical dotted line */}
+            <div className="absolute left-8 top-6 bottom-6 w-px bg-neutral-200" />
+            <div className="absolute left-8 top-6 bottom-6 w-px [background-image:repeating-linear-gradient(to_bottom,#a3a3a3_0px,#a3a3a3_6px,transparent_6px,transparent_14px)] opacity-40" />
+
+            <div className="space-y-6">
+              {STEPS.map((s, idx) => {
+                const tone = s.tone ?? "normal";
+                const isPrimary = tone === "primary";
+                const isMuted = tone === "muted";
+
+                const dotClass = isPrimary
+                  ? "bg-blue-600"
+                  : isMuted
+                  ? "bg-neutral-300"
+                  : "bg-neutral-500";
+
+                const pillClass = isPrimary
+                  ? "border-blue-200 bg-blue-50"
+                  : isMuted
+                  ? "border-neutral-200 bg-neutral-50"
+                  : "border-neutral-200 bg-white";
+
+                return (
+                  <div key={idx} className="relative pl-14">
+                    {/* node */}
+                    <div className="absolute left-6 top-3 flex h-5 w-5 items-center justify-center">
+                      <span className={["h-2.5 w-2.5 rounded-full", dotClass].join(" ")} />
+                    </div>
+
+                    {/* pill */}
+                    <div
+                      className={[
+                        "w-full rounded-2xl px-5 py-4",
+                        "border",
+                        "shadow-sm",
+                        "transition-transform duration-300 hover:-translate-y-0.5",
+                        pillClass,
+                      ].join(" ")}
+                    >
+                      <div className="flex items-start gap-3">
+                        <span className="text-xl leading-none mt-0.5">{s.emoji}</span>
+                        <div>
+                          <div className="text-base md:text-lg font-semibold tracking-tight text-neutral-900">
+                            {s.label}
+                          </div>
+                          {s.sub && (
+                            <div className="mt-1 text-sm leading-relaxed text-neutral-500">
+                              {s.sub}
+                            </div>
+                          )}
                         </div>
-                        <div className="h-10 rounded-xl bg-black/5" />
                       </div>
                     </div>
                   </div>
-                </div>
-
-                {/* 오른쪽 텍스트 */}
-                <div className="col-span-12 md:col-span-5">
-                  <h3 className="text-xl font-bold tracking-tight">
-                    Keep every project moving forward
-                  </h3>
-                  <p className="mt-3 text-base text-black/60 leading-relaxed">
-                    Stay organized across clients, tasks, and invoices with a clean
-                    workflow that works on desktop and mobile.
-                  </p>
-
-                  <div className="mt-6 flex items-center justify-center md:justify-start">
-                    <Button href="/signup">Get started</Button>
-                  </div>
-
-                  <div className="mt-6 flex items-center gap-5 text-xs text-black/45">
-                    <span className="inline-flex items-center gap-2">
-                      <span className="h-2 w-2 rounded-full bg-black/30" />
-                      iOS
-                    </span>
-                    <span className="inline-flex items-center gap-2">
-                      <span className="h-2 w-2 rounded-full bg-black/30" />
-                      Android
-                    </span>
-                    <span className="inline-flex items-center gap-2">
-                      <span className="h-2 w-2 rounded-full bg-black/30" />
-                      Web
-                    </span>
-                  </div>
-                </div>
-              </div>
+                );
+              })}
             </div>
-
-            {/* 카드 하단 살짝 톤 변화 */}
-            <div className="h-10 bg-gradient-to-b from-white to-black/5" />
           </div>
         </div>
       </Container>
