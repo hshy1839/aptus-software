@@ -1,140 +1,82 @@
-// src/components/sections/PricingSection.tsx
+// src/components/sections/UseCaseSection.tsx
 import Container from "../Container";
-import Button from "../Button";
 import Reveal from "../ui/Reveal";
 
-type Plan = {
-  name: string;
-  price: string;
-  period: string;
-  tagline: string;
-  features: string[];
-  cta: { text: string; href: string; variant?: "primary" | "secondary" };
-  highlight?: boolean;
+type UseCase = {
+  text: string;
 };
 
-const plans: Plan[] = [
-  {
-    name: "Starter",
-    price: "Free",
-    period: "",
-    tagline: "For trying the workflow",
-    features: ["1 workspace", "Basic client list", "Simple project tracking", "Email support"],
-    cta: { text: "Get started", href: "/signup", variant: "secondary" },
-  },
-  {
-    name: "Pro",
-    price: "$19",
-    period: "/mo",
-    tagline: "For serious freelancers",
-    features: [
-      "Unlimited clients & projects",
-      "Invoices + payment status",
-      "Analytics dashboard",
-      "Export & reports",
-      "Priority support",
-    ],
-    cta: { text: "Start Pro", href: "/signup", variant: "primary" },
-    highlight: true,
-  },
-  {
-    name: "Team",
-    price: "$49",
-    period: "/mo",
-    tagline: "For small studios",
-    features: [
-      "Up to 5 seats",
-      "Roles & permissions",
-      "Shared pipeline",
-      "Team analytics",
-      "SLA support",
-    ],
-    cta: { text: "Contact sales", href: "/contact", variant: "secondary" },
-  },
+const useCases: UseCase[] = [
+  { text: "빠르게 MVP를 만들어 시장 반응을 확인해야 할 때" },
+  { text: "복잡한 로직이 필요하지만, 비용 때문에 개발이 망설여질 때" },
+  { text: "내부 개발 리소스가 부족해 일정이 계속 밀리고 있을 때" },
+  { text: "디자인은 준비됐고, 이제 개발 파트너만 필요할 때" },
+  { text: "AI/GPT API 연동 등 외부 API 기반 기능 구현이 필요할 때" },
+  { text: "오픈 이후까지 안정적으로 함께 갈 개발 파트너가 필요할 때" },
 ];
 
-function Check() {
+export default function UseCaseSection() {
   return (
-    <span className="mt-[2px] inline-flex h-5 w-5 items-center justify-center rounded-full bg-black/5">
-      <span className="h-2 w-2 rounded-full bg-black/50" />
-    </span>
-  );
-}
+    <section className="relative overflow-hidden py-24">
+      {/* Theme: warm premium (not the old slate/blue) */}
+      <div className="absolute inset-0 -z-10">
+        {/* base */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#FBFAF7] via-[#F6F4EE] to-[#FBFAF7]" />
 
-export default function PricingSection() {
-  return (
-    <section className="py-24">
+        {/* soft “ink” vignette */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0)_0%,rgba(15,23,42,0.05)_55%,rgba(15,23,42,0.09)_100%)]" />
+
+        {/* subtle grain */}
+        <div className="absolute inset-0 opacity-[0.035] [background-image:radial-gradient(#000_1px,transparent_1px)] [background-size:26px_26px]" />
+
+        {/* warm highlight blobs */}
+        <div className="absolute -top-56 left-1/2 h-[620px] w-[620px] -translate-x-1/2 rounded-full bg-amber-400/12 blur-[140px]" />
+        <div className="absolute -bottom-72 -right-56 h-[620px] w-[620px] rounded-full bg-emerald-400/10 blur-[160px]" />
+      </div>
+
       <Container>
-        {/* 타이틀 블록: 먼저 등장 */}
+        {/* Header */}
         <Reveal>
           <div className="text-center">
-            <p className="text-xs font-semibold tracking-[0.25em] text-black/40">PRICING</p>
-            <h2 className="mt-3 text-3xl md:text-4xl font-bold tracking-tight">
-              Simple plans that scale
+            <p className="text-xs font-semibold tracking-[0.28em] text-black/35">
+              USE CASE
+            </p>
+
+            <h2 className="mt-4 text-3xl md:text-5xl font-extrabold tracking-tight text-[#0B1220]">
+              이런 경우 <span className="text-blue-600">Aptus</span>가 필요합니다
             </h2>
-            <p className="mt-4 text-base md:text-lg text-black/60 max-w-2xl mx-auto">
-              Start free, upgrade when you’re ready. No hidden fees, cancel anytime.
+
+            <p className="mt-5 text-sm md:text-base text-black/55">
+              “외주가 필요한 순간”을 딱 6가지로 정리했습니다.
             </p>
           </div>
         </Reveal>
 
-        {/* 카드 그리드 */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-          {plans.map((p, idx) => (
-            <Reveal key={p.name} delay={idx * 0.08} y={28}>
+        {/* Pills (image-like) */}
+        <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-5xl mx-auto">
+          {useCases.map((u, idx) => (
+            <Reveal key={u.text} delay={idx * 0.06} y={16}>
               <div
                 className={[
-                  "rounded-[32px] border border-black/10 bg-white p-7 md:p-8",
-                  "shadow-[0_25px_80px_rgba(15,23,42,0.10)]",
-                  "transition will-change-transform",
-                  p.highlight ? "relative md:-mt-2 md:mb-2 ring-1 ring-black/10" : "",
+                  "rounded-full px-7 py-5 text-center",
+                  "border border-black/10",
+                  "bg-white/60 backdrop-blur-md",
+                  "shadow-[0_18px_45px_rgba(15,23,42,0.10)]",
+                  "text-[15px] md:text-base font-semibold",
+                  "text-[#111827]",
+                  "transition-transform duration-300 hover:-translate-y-0.5",
                 ].join(" ")}
               >
-                {p.highlight ? (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <span className="rounded-full bg-black px-3 py-1 text-xs font-semibold text-white">
-                      Most popular
-                    </span>
-                  </div>
-                ) : null}
-
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h3 className="text-lg font-bold">{p.name}</h3>
-                    <p className="mt-1 text-sm text-black/55">{p.tagline}</p>
-                  </div>
-                </div>
-
-                <div className="mt-6 flex items-baseline gap-2">
-                  <span className="text-4xl font-extrabold tracking-tight">{p.price}</span>
-                  {p.period ? <span className="text-sm text-black/45">{p.period}</span> : null}
-                </div>
-
-                <div className="mt-6">
-                  <Button href={p.cta.href} variant={p.cta.variant ?? "primary"}>
-                    {p.cta.text}
-                  </Button>
-                </div>
-
-                <div className="mt-7 space-y-3">
-                  {p.features.map((f) => (
-                    <div key={f} className="flex gap-3 text-sm text-black/65">
-                      <Check />
-                      <span>{f}</span>
-                    </div>
-                  ))}
-                </div>
-
-                {p.highlight ? (
-                  <div className="mt-7 rounded-2xl bg-black/5 p-4 text-xs text-black/60">
-                    <div className="font-semibold text-black/70">Pro tip</div>
-                    <div className="mt-1">Most users break even with 1–2 paid invoices.</div>
-                  </div>
-                ) : null}
+                {u.text}
               </div>
             </Reveal>
           ))}
         </div>
+
+        {/* small note */}
+        <p className="mt-10 text-center text-xs text-black/40">
+          * Aptus는 “빠른 실행 + 합리적 비용 + 책임 있는 운영”을 기준으로 일합니다.
+        </p>
       </Container>
     </section>
   );
