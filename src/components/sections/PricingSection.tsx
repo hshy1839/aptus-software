@@ -7,12 +7,12 @@ type UseCase = {
 };
 
 const useCases: UseCase[] = [
-  { text: "빠르게 MVP를 만들어 시장 반응을 확인해야 할 때" },
-  { text: "복잡한 로직이 필요하지만, 비용 때문에 개발이 망설여질 때" },
-  { text: "내부 개발 리소스가 부족해 일정이 계속 밀리고 있을 때" },
-  { text: "디자인은 준비됐고, 이제 개발 파트너만 필요할 때" },
-  { text: "AI/GPT API 연동 등 외부 API 기반 기능 구현이 필요할 때" },
-  { text: "오픈 이후까지 안정적으로 함께 갈 개발 파트너가 필요할 때" },
+  { text: "시장 검증을 위한 MVP, 가장 빠른 속도로 현실화합니다" },
+  { text: "복잡한 기능 구현과 합리적인 비용, 두 마리 토끼를 잡으세요" },
+  { text: "정체된 개발 스케줄에 즉각적인 실행력을 더해드립니다" },
+  { text: "완성된 디자인을 빈틈없는 코드와 사용자 경험으로 전환합니다" },
+  { text: "LLM 및 AI API 연동으로 서비스의 기술적 격차를 만듭니다" },
+  { text: "단순 런칭을 넘어 비즈니스의 지속 가능한 성장을 함께 고민합니다" },
 ];
 
 export default function UseCaseSection() {
@@ -43,11 +43,11 @@ export default function UseCaseSection() {
             </p>
 
             <h2 className="mt-4 text-3xl md:text-5xl font-extrabold tracking-tight text-[#0B1220]">
-              이런 경우 <span className="text-blue-600">Aptus</span>가 필요합니다
+             막막한 개발의 해답, <br /><span className="text-blue-600"> Aptus</span>의 강점
             </h2>
 
             <p className="mt-5 text-sm md:text-base text-black/55">
-              “외주가 필요한 순간”을 딱 6가지로 정리했습니다.
+              고객 맞춤형 개발 아웃소싱의 진정한 가치를 경험하세요.
             </p>
           </div>
         </Reveal>

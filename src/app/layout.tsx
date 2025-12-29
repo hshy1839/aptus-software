@@ -1,5 +1,6 @@
-// app/layout.tsx
 import "./globals.css";
+import ContactDrawerProvider from "@/components/contact/ContactDrawerProvider";
+import FloatingKakaoButton from "@/components/FloatingKakaoButton";
 
 export default function RootLayout({
   children,
@@ -8,7 +9,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body>{children}</body>
+      <body>
+        <ContactDrawerProvider>
+          {children}
+
+          {/* ✅ 전역 고정 카카오톡 상담 버튼 */}
+          <FloatingKakaoButton />
+        </ContactDrawerProvider>
+      </body>
     </html>
   );
 }

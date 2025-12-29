@@ -52,7 +52,7 @@ export default function ShowcaseSync() {
           </p>
 
           <h2 className="mx-auto mt-4 max-w-4xl text-4xl md:text-6xl font-bold tracking-tight leading-[1.15]">
-           앱, 웹 및 복잡한 프로그램까지,
+         
             <br className="hidden md:block" />  
             개발이 필요한 <span className="text-blue-600">모든 순간</span>
              <br/>앱터스와 함께하세요.
