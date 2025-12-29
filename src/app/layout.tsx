@@ -1,6 +1,13 @@
+// app/layout.tsx
 import "./globals.css";
 import ContactDrawerProvider from "@/components/contact/ContactDrawerProvider";
 import FloatingKakaoButton from "@/components/FloatingKakaoButton";
+import ScrollToTopButton from "@/components/ScrollToTopButton";
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
 
 export default function RootLayout({
   children,
@@ -13,7 +20,10 @@ export default function RootLayout({
         <ContactDrawerProvider>
           {children}
 
-          {/* ✅ 전역 고정 카카오톡 상담 버튼 */}
+          {/* 🔼 맨 위로 */}
+          <ScrollToTopButton />
+
+          {/* 💬 카카오톡 상담 */}
           <FloatingKakaoButton />
         </ContactDrawerProvider>
       </body>

@@ -16,7 +16,7 @@ export default function FloatingKakaoButton() {
       rel="noopener noreferrer"
       aria-label="카카오톡 실시간 상담"
       className="
-        fixed bottom-6 right-15 z-[120]
+        fixed bottom-6 right-6 z-[120]
         flex items-center gap-3
         rounded-3xl bg-[#FEE500]
         px-4 py-3
@@ -30,8 +30,8 @@ export default function FloatingKakaoButton() {
       <Image
         src="/KakaoTalk_logo.svg"
         alt="KakaoTalk"
-        width={52}
-        height={52}
+        width={32}
+        height={32}
         priority
       />
 

@@ -73,6 +73,9 @@ export default function ProcessSection() {
             TOP: WHY APTUS
            ───────────────────────────────────────────── */}
         <div className="text-center">
+           <p className="text-xs mb-4 font-semibold tracking-[0.28em] text-neutral-400">
+            WHY
+          </p>
           <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-neutral-900">
             왜 <span className="text-blue-600">APTUS</span>인가요?
           </h2>
@@ -101,6 +104,9 @@ export default function ProcessSection() {
             MID: APTUS SPEC
            ───────────────────────────────────────────── */}
         <div className="mt-50 text-center">
+          <p className="text-xs mb-4 font-semibold tracking-[0.28em] text-neutral-400">
+            HOW
+          </p>
           <h3 className="text-2xl md:text-4xl font-extrabold tracking-tight text-neutral-900">
             <span className="text-blue-600">APTUS</span>의 개발 스펙
           </h3>
