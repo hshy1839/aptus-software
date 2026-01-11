@@ -1,4 +1,7 @@
 // src/components/sections/UseCaseSection.tsx
+"use client";
+
+import Image from "next/image";
 import Container from "../Container";
 import Reveal from "../ui/Reveal";
 
@@ -18,23 +21,33 @@ const useCases: UseCase[] = [
 export default function UseCaseSection() {
   return (
     <section className="relative overflow-hidden py-24">
-      {/* 1️⃣ background image ONLY */}
-      <div
-        className="absolute inset-0 -z-20 bg-center bg-cover"
-        style={{
-          backgroundImage: "url('/background01.jpg')",
-          filter: "grayscale(100%)",
-        }}
-      />
+      {/* ✅ Highest-performance background:
+          - next/image (responsive + optimized)
+          - NO CSS background-image
+          - NO filter(grayscale) (GPU/paint cost)
+          - Use lightweight overlays for “desaturated” mood */}
+      <div className="absolute inset-0 -z-20">
+        <Image
+          src="/background01.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover object-center"
+          // priority ❌ : Hero가 LCP라면 여기 priority 주면 오히려 느려질 수 있음
+        />
+      </div>
 
-      {/* 2️⃣ overlay (가독성용) */}
-      <div className="absolute inset-0 -z-10 bg-black/45" />
+      {/* ✅ Lightweight overlays (tone + readability)
+          - These are cheap compared to grayscale filter/backdrop-blur */}
+      <div className="absolute inset-0 -z-10 bg-black/55" />
+      <div className="absolute inset-0 -z-10 bg-white/5" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/35 via-black/45 to-black/70" />
 
-      {/* 3️⃣ content (영향 없음) */}
       <Container>
+        {/* Header */}
         <Reveal>
           <div className="text-center">
-            <p className="text-xs font-semibold tracking-[0.28em] text-white/60">
+            <p className="text-xs font-semibold tracking-[0.28em] text-white/65">
               USE CASE
             </p>
 
@@ -43,27 +56,40 @@ export default function UseCaseSection() {
               <span className="text-blue-400">Aptus</span>의 강점
             </h2>
 
-            <p className="mt-5 text-sm md:text-base text-white/70">
+            <p className="mt-5 text-sm md:text-base text-white/75">
               고객 맞춤형 개발 아웃소싱의 진정한 가치를 경험하세요.
             </p>
           </div>
         </Reveal>
 
+        {/* Pills (performance-optimized)
+            - NO backdrop-blur (expensive on mobile)
+            - Slightly higher opacity bg + shadow for premium feel */}
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-5xl mx-auto">
           {useCases.map((u, idx) => (
-            <Reveal key={u.text} delay={idx * 0.06} y={16}>
-              <div className="rounded-full px-7 py-5 text-center bg-white/80 backdrop-blur-md font-semibold text-[#111827] shadow-lg">
+            <Reveal key={u.text} delay={idx * 0.06} y={14}>
+              <div
+                className={[
+                  "rounded-full px-7 py-5 text-center",
+                  "border border-white/15",
+                  "bg-white/90", // blur 없이도 가독성 확보
+                  "shadow-[0_14px_34px_rgba(0,0,0,0.28)]",
+                  "text-[15px] md:text-base font-semibold text-[#111827]",
+                  "transition-transform duration-300 hover:-translate-y-0.5",
+                  // 모바일 페인트/합성 비용 절감
+                  "will-change-transform",
+                ].join(" ")}
+              >
                 {u.text}
               </div>
             </Reveal>
           ))}
         </div>
 
-        <p className="mt-10 text-center text-xs text-white/50">
+        <p className="mt-10 text-center text-xs text-white/55">
           * Aptus는 “빠른 실행 + 합리적 비용 + 책임 있는 운영”을 기준으로 일합니다.
         </p>
       </Container>
     </section>
   );
 }
-

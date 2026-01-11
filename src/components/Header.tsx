@@ -33,9 +33,7 @@ export default function Header() {
             <Link href="/pricing" className="text-black/60 hover:text-black transition">
               Pricing
             </Link>
-            <Link href="/blog" className="text-black/60 hover:text-black transition">
-              Blog
-            </Link>
+         
           </nav>
 
           {/* 액션 */}
