@@ -18,66 +18,52 @@ const useCases: UseCase[] = [
 export default function UseCaseSection() {
   return (
     <section className="relative overflow-hidden py-24">
-      {/* Theme: warm premium (not the old slate/blue) */}
-      <div className="absolute inset-0 -z-10">
-        {/* base */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FBFAF7] via-[#F6F4EE] to-[#FBFAF7]" />
+      {/* 1️⃣ background image ONLY */}
+      <div
+        className="absolute inset-0 -z-20 bg-center bg-cover"
+        style={{
+          backgroundImage: "url('/background01.jpg')",
+          filter: "grayscale(100%)",
+        }}
+      />
 
-        {/* soft “ink” vignette */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0)_0%,rgba(15,23,42,0.05)_55%,rgba(15,23,42,0.09)_100%)]" />
+      {/* 2️⃣ overlay (가독성용) */}
+      <div className="absolute inset-0 -z-10 bg-black/45" />
 
-        {/* subtle grain */}
-        <div className="absolute inset-0 opacity-[0.035] [background-image:radial-gradient(#000_1px,transparent_1px)] [background-size:26px_26px]" />
-
-        {/* warm highlight blobs */}
-        <div className="absolute -top-56 left-1/2 h-[620px] w-[620px] -translate-x-1/2 rounded-full bg-amber-400/12 blur-[140px]" />
-        <div className="absolute -bottom-72 -right-56 h-[620px] w-[620px] rounded-full bg-emerald-400/10 blur-[160px]" />
-      </div>
-
+      {/* 3️⃣ content (영향 없음) */}
       <Container>
-        {/* Header */}
         <Reveal>
           <div className="text-center">
-            <p className="text-xs font-semibold tracking-[0.28em] text-black/35">
+            <p className="text-xs font-semibold tracking-[0.28em] text-white/60">
               USE CASE
             </p>
 
-            <h2 className="mt-4 text-3xl md:text-5xl font-extrabold tracking-tight text-[#0B1220]">
-             막막한 개발의 해답, <br /><span className="text-blue-600"> Aptus</span>의 강점
+            <h2 className="mt-4 text-3xl md:text-5xl font-extrabold tracking-tight text-white">
+              막막한 개발의 해답, <br />
+              <span className="text-blue-400">Aptus</span>의 강점
             </h2>
 
-            <p className="mt-5 text-sm md:text-base text-black/55">
+            <p className="mt-5 text-sm md:text-base text-white/70">
               고객 맞춤형 개발 아웃소싱의 진정한 가치를 경험하세요.
             </p>
           </div>
         </Reveal>
 
-        {/* Pills (image-like) */}
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-5xl mx-auto">
           {useCases.map((u, idx) => (
             <Reveal key={u.text} delay={idx * 0.06} y={16}>
-              <div
-                className={[
-                  "rounded-full px-7 py-5 text-center",
-                  "border border-black/10",
-                  "bg-white/60 backdrop-blur-md",
-                  "shadow-[0_18px_45px_rgba(15,23,42,0.10)]",
-                  "text-[15px] md:text-base font-semibold",
-                  "text-[#111827]",
-                  "transition-transform duration-300 hover:-translate-y-0.5",
-                ].join(" ")}
-              >
+              <div className="rounded-full px-7 py-5 text-center bg-white/80 backdrop-blur-md font-semibold text-[#111827] shadow-lg">
                 {u.text}
               </div>
             </Reveal>
           ))}
         </div>
 
-        {/* small note */}
-        <p className="mt-10 text-center text-xs text-black/40">
+        <p className="mt-10 text-center text-xs text-white/50">
           * Aptus는 “빠른 실행 + 합리적 비용 + 책임 있는 운영”을 기준으로 일합니다.
         </p>
       </Container>
     </section>
   );
 }
+

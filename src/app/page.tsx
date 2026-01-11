@@ -22,17 +22,12 @@ export default function Home() {
           <Hero />
         </Reveal>
 
-        <Reveal>
-          <LogosStrip />
-        </Reveal>
-
+     
         <Reveal>
           <ShowcaseSync />
         </Reveal>
 
-        <Reveal>
           <FeaturesSection />
-        </Reveal>
 
         <Reveal>
           <div id="pricing">
