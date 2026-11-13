@@ -124,7 +124,7 @@ function ContactDrawer() {
       {/* Panel */}
       <div
         ref={panelRef}
-        className={`absolute right-0 top-0 h-full w-full sm:w-[520px]
+        className={`system-contact-panel absolute right-0 top-0 h-full w-full sm:w-[520px]
         bg-white shadow-[0_30px_80px_rgba(15,23,42,0.22)]
         transition-transform duration-300 ease-out
         ${isOpen ? "translate-x-0" : "translate-x-full"}`}
@@ -218,6 +218,15 @@ function ContactDrawer() {
               />
             </Field>
 
+            <Field label="관심 서비스">
+              <select name="service" className="input" required defaultValue="">
+                <option value="" disabled>선택해주세요</option>
+                <option value="웹사이트 제작">웹사이트 제작</option>
+                <option value="모바일 앱 개발">모바일 앱 개발</option>
+                <option value="웹사이트 앱 패키징">웹사이트 앱 패키징</option>
+              </select>
+            </Field>
+
             <Field label="프로젝트 내용">
               <textarea
                 name="message"
@@ -245,6 +254,11 @@ function ContactDrawer() {
                 </select>
               </Field>
             </div>
+
+            <label className="flex items-start gap-3 text-xs leading-relaxed text-black/60">
+              <input name="consent" value="true" type="checkbox" required className="mt-1 h-4 w-4" />
+              <span>문의 내용 확인과 답변을 위한 개인정보 수집에 동의합니다.</span>
+            </label>
 
             <button
               type="submit"
