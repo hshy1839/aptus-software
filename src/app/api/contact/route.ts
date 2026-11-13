@@ -23,8 +23,10 @@ type ContactPayload = {
   company?: string;
   contact: string; // email or phone
   message: string;
+  service?: string;
   timeline?: string;
   budget?: string;
+  consent?: string;
 };
 
 export async function POST(req: Request) {
@@ -44,10 +46,12 @@ export async function POST(req: Request) {
     const company = (body.company || "").trim();
     const contact = (body.contact || "").trim();
     const message = (body.message || "").trim();
+    const service = (body.service || "").trim();
     const timeline = (body.timeline || "").trim();
     const budget = (body.budget || "").trim();
+    const consent = body.consent === "true";
 
-    if (!name || !contact || !message) {
+    if (!name || !contact || !message || !service || !consent) {
       return NextResponse.json(
         { ok: false, message: "REQUIRED_FIELDS_MISSING" },
         { status: 400 }
@@ -65,6 +69,7 @@ export async function POST(req: Request) {
           <tr><td style="padding:10px;border:1px solid #eee;width:140px">이름</td><td style="padding:10px;border:1px solid #eee">${esc(name)}</td></tr>
           <tr><td style="padding:10px;border:1px solid #eee">회사</td><td style="padding:10px;border:1px solid #eee">${esc(company || "-")}</td></tr>
           <tr><td style="padding:10px;border:1px solid #eee">연락처</td><td style="padding:10px;border:1px solid #eee">${esc(contact)}</td></tr>
+          <tr><td style="padding:10px;border:1px solid #eee">서비스</td><td style="padding:10px;border:1px solid #eee">${esc(service)}</td></tr>
           <tr><td style="padding:10px;border:1px solid #eee">희망 일정</td><td style="padding:10px;border:1px solid #eee">${esc(timeline || "-")}</td></tr>
           <tr><td style="padding:10px;border:1px solid #eee">예산</td><td style="padding:10px;border:1px solid #eee">${esc(budget || "-")}</td></tr>
         </table>

@@ -4,6 +4,21 @@ import type { Metadata, Viewport } from "next";
 import ContactDrawerProvider from "@/components/contact/ContactDrawerProvider";
 import FloatingKakaoButton from "@/components/FloatingKakaoButton";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
+import { IBM_Plex_Mono, Inter } from "next/font/google";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-plex-mono",
+  display: "swap",
+});
+
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -14,11 +29,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.aptus-software.com"),
   title: {
-    default: "Aptus Software Solutions | IT 외주 개발 · MVP · 앱/웹 개발",
+    default: "APTUS SYSTEMS — Digital Product Engineering",
     template: "%s | Aptus Software Solutions",
   },
   description:
-    "앱터스는 IT 외주 개발 파트너입니다. 앱·웹·관리자·MVP를 빠르고 투명하게 개발하고, 일정/커뮤니케이션/운영까지 책임집니다.",
+    "APTUS는 웹사이트, 모바일 앱, 웹사이트 앱 패키징을 정교한 디지털 시스템으로 구현합니다.",
   keywords: [
     "IT 외주 개발",
     "앱 개발 외주",
@@ -34,9 +49,9 @@ export const metadata: Metadata = {
     type: "website",
     url: "/",
     siteName: "Aptus Software Solutions",
-    title: "Aptus Software Solutions | IT 외주 개발 · MVP · 앱/웹 개발",
+    title: "APTUS SYSTEMS — Digital Product Engineering",
     description:
-      "앱터스는 IT 외주 개발 파트너입니다. 앱·웹·관리자·MVP를 빠르고 투명하게 개발하고, 운영까지 책임집니다.",
+      "APTUS는 웹사이트, 모바일 앱, 웹사이트 앱 패키징을 정교한 디지털 시스템으로 구현합니다.",
     images: [
       {
         url: "/og.png", // public/og.png 준비 추천(1200x630)
@@ -49,9 +64,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aptus Software Solutions | IT 외주 개발 · MVP · 앱/웹 개발",
+    title: "APTUS SYSTEMS — Digital Product Engineering",
     description:
-      "앱터스는 IT 외주 개발 파트너입니다. 앱·웹·관리자·MVP를 빠르고 투명하게 개발하고, 운영까지 책임집니다.",
+      "APTUS는 웹사이트, 모바일 앱, 웹사이트 앱 패키징을 정교한 디지털 시스템으로 구현합니다.",
     images: ["/og.png"],
   },
   robots: {
@@ -78,7 +93,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body>
+      <body className={`${inter.variable} ${plexMono.variable}`}>
         <ContactDrawerProvider>
           {children}
 
