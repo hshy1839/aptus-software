@@ -124,13 +124,13 @@ function ContactDrawer() {
       {/* Panel */}
       <div
         ref={panelRef}
-        className={`system-contact-panel absolute right-0 top-0 h-full w-full sm:w-[520px]
+        className={`system-contact-panel absolute right-0 top-0 h-full w-full sm:w-[560px]
         bg-white shadow-[0_30px_80px_rgba(15,23,42,0.22)]
         transition-transform duration-300 ease-out
         ${isOpen ? "translate-x-0" : "translate-x-full"}`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between border-b px-6 py-5">
+        <div className="system-contact-header flex items-center justify-between border-b px-6 py-5">
           <div>
             <div className="text-xs font-semibold tracking-[0.25em] text-black/40">
               CONTACT
@@ -141,15 +141,15 @@ function ContactDrawer() {
           </div>
           <button
             onClick={close}
-            className="rounded-xl border px-3 py-2 text-sm hover:bg-black/5"
+            className="system-contact-close rounded-xl border px-3 py-2 text-sm hover:bg-black/5"
           >
             닫기
           </button>
         </div>
 
         {/* Body */}
-        <div className="h-[calc(100%-72px)] overflow-y-auto px-6 py-6">
-          <p className="text-sm text-black/60">
+        <div className="system-contact-body h-[calc(100%-72px)] overflow-y-auto px-6 py-6">
+          <p className="system-contact-intro text-sm text-black/60">
             간단히 적어주셔도 충분합니다.
           </p>
 
@@ -157,7 +157,7 @@ function ContactDrawer() {
               FORM
           ========================= */}
           <form
-            className="mt-6 space-y-4"
+            className="system-contact-form mt-6 space-y-4"
             onSubmit={async (e) => {
               e.preventDefault();
               if (loading) return;
@@ -263,13 +263,13 @@ function ContactDrawer() {
             <button
               type="submit"
               disabled={loading}
-              className="h-12 w-full rounded-2xl bg-black text-white font-semibold disabled:opacity-50"
+              className="system-contact-submit h-12 w-full rounded-2xl bg-black text-white font-semibold disabled:opacity-50"
             >
               {loading ? "전송 중..." : "문의 내용 보내기"}
             </button>
           </form>
 
-          <div className="mt-8 rounded-2xl bg-black/5 p-4 text-xs text-black/60">
+          <div className="system-contact-note mt-8 rounded-2xl bg-black/5 p-4 text-xs text-black/60">
             • 범위·일정 문서화 후 진행<br />
             • 주간 진행 공유<br />
             • 배포·운영까지 책임
@@ -278,21 +278,60 @@ function ContactDrawer() {
       </div>
 
       <style jsx>{`
+        .system-contact-panel {
+          border-left: 1px solid var(--sys-line, rgba(0, 0, 0, 0.14));
+          background: var(--sys-surface, #fff) !important;
+        }
+        .system-contact-header {
+          min-height: 86px;
+          border-color: var(--sys-line, rgba(0, 0, 0, 0.14));
+        }
+        .system-contact-header :global(.text-xl) {
+          letter-spacing: -0.04em;
+        }
+        .system-contact-close {
+          border-radius: 0;
+          border-color: var(--sys-line, rgba(0, 0, 0, 0.14));
+          font-family: var(--font-mono, monospace);
+        }
+        .system-contact-body {
+          background: var(--sys-surface, #fff);
+        }
+        .system-contact-intro {
+          max-width: 330px;
+          line-height: 1.65;
+        }
+        .system-contact-form :global(label > div) {
+          font-family: var(--font-mono, monospace);
+          letter-spacing: 0.11em;
+        }
         .input {
-          height: 48px;
+          height: 50px;
           width: 100%;
-          border-radius: 16px;
-          border: 1px solid rgba(0, 0, 0, 0.1);
+          border-radius: 0;
+          border: 1px solid var(--sys-line, rgba(0, 0, 0, 0.18));
           padding: 0 16px;
+          background: var(--sys-bg, #f7f8fa);
           font-size: 14px;
         }
         .textarea {
           min-height: 120px;
           width: 100%;
-          border-radius: 16px;
-          border: 1px solid rgba(0, 0, 0, 0.1);
+          border-radius: 0;
+          border: 1px solid var(--sys-line, rgba(0, 0, 0, 0.18));
           padding: 12px 16px;
+          background: var(--sys-bg, #f7f8fa);
           font-size: 14px;
+        }
+        .system-contact-submit {
+          border-radius: 0;
+          font-family: var(--font-mono, monospace);
+          letter-spacing: 0.08em;
+        }
+        .system-contact-note {
+          border-radius: 0;
+          border: 1px solid var(--sys-line, rgba(0, 0, 0, 0.14));
+          line-height: 1.7;
         }
       `}</style>
     </div>
