@@ -13,6 +13,7 @@ export default function SystemHero() {
   const { open } = useContactDrawer();
 
   useLayoutEffect(() => {
+    let removePointerListener = () => {};
     const context = gsap.context(() => {
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       const select = gsap.utils.selector(root);
@@ -45,8 +46,31 @@ export default function SystemHero() {
         .to(select("#logo-divider"), { autoAlpha: 1, scaleY: 1, duration: 0.15 }, 0.5)
         .to(select(".aptus-logo"), { scale: desktop ? 0.78 : 0.88, y: desktop ? -12 : -28, duration: 0.24, ease: "power2.inOut" }, 0.64)
         .to(select(".hero-manifesto"), { y: desktop ? -12 : -6, duration: 0.18 }, 0.64);
+
+      const stage = select(".assembly-stage")[0] as HTMLElement | undefined;
+      if (desktop && stage && root.current) {
+        const onPointerMove = (event: PointerEvent) => {
+          const bounds = root.current?.getBoundingClientRect();
+          if (!bounds) return;
+          stage.style.setProperty("--pointer-x", `${gsap.utils.clamp(-14, 14, ((event.clientX - bounds.left) / bounds.width - 0.5) * 28)}px`);
+          stage.style.setProperty("--pointer-y", `${gsap.utils.clamp(-10, 10, ((event.clientY - bounds.top) / bounds.height - 0.5) * 20)}px`);
+        };
+        const onPointerLeave = () => {
+          stage.style.removeProperty("--pointer-x");
+          stage.style.removeProperty("--pointer-y");
+        };
+        root.current.addEventListener("pointermove", onPointerMove);
+        root.current.addEventListener("pointerleave", onPointerLeave);
+        removePointerListener = () => {
+          root.current?.removeEventListener("pointermove", onPointerMove);
+          root.current?.removeEventListener("pointerleave", onPointerLeave);
+        };
+      }
     }, root);
-    return () => context.revert();
+    return () => {
+      removePointerListener();
+      context.revert();
+    };
   }, []);
 
   return <section ref={root} className="bright-hero assembly-hero" aria-labelledby="hero-title">
@@ -60,5 +84,6 @@ export default function SystemHero() {
     <div className="hero-manifesto"><p className="hero-eyebrow">DIGITAL PRODUCT STUDIO</p><h1 id="hero-title">아이디어를<br /><i>실제 디지털 제품으로.</i></h1><p>웹사이트 제작 · 모바일 앱 개발 · 웹사이트 앱 패키징</p></div>
     <div className="assembly-actions"><button className="system-button primary" type="button" onClick={open}>프로젝트 문의하기 <span>↗</span></button><a className="system-button" href="#systems">서비스 살펴보기 <span>↘</span></a></div>
     <div className="hero-foot"><span>SCROLL TO ALIGN ↓</span><span>STRATEGY · DESIGN · ENGINEERING</span></div>
+    <style jsx global>{`.assembly-stage{transform:translate3d(var(--pointer-x,0),var(--pointer-y,0),0);transition:transform .42s cubic-bezier(.22,1,.36,1)}`}</style>
   </section>;
 }
