@@ -46,7 +46,7 @@ export default function ServiceShowcase() {
     <style jsx global>{`
       .service-showcase{min-height:auto;padding:120px 7vw;background:var(--sys-bg);overflow:visible}
       .showcase-label{position:static;max-width:1240px;margin:0 auto 44px;display:flex;justify-content:space-between;color:var(--sys-muted);font:10px var(--font-mono);letter-spacing:.12em}
-      .service-scene{position:relative;inset:auto;display:grid;min-height:620px;max-width:1240px;margin:auto;padding:88px 0;grid-template-columns:minmax(300px,.76fr) minmax(500px,1.25fr);gap:8vw;align-items:center;opacity:1;visibility:visible;background:transparent;border-top:1px solid var(--sys-line)}
+      .service-scene{position:relative;inset:auto;display:grid;min-height:100svh;max-width:1240px;margin:auto;padding:88px 0;grid-template-columns:minmax(300px,.76fr) minmax(500px,1.25fr);gap:8vw;align-items:center;opacity:1;visibility:visible;background:transparent;border-top:1px solid var(--sys-line)}
       .service-scene:last-of-type{border-bottom:1px solid var(--sys-line)}
       .scene-phone .service-copy{order:2}.scene-phone .service-demo{order:1;background:var(--sys-soft)}.scene-transform .service-demo{background:var(--sys-bg)}
       .scene-progress{position:absolute;right:0;bottom:26px;display:flex;gap:10px;color:var(--sys-muted);font:10px var(--font-mono)}.scene-progress b{color:var(--sys-ink);font-weight:400}
