@@ -26,25 +26,32 @@ export default function ServiceShowcase() {
     const context = gsap.context(() => {
       if (window.matchMedia("(max-width: 820px), (prefers-reduced-motion: reduce)").matches) return;
       const q = gsap.utils.selector(root);
-      const slides = q(".service-scene");
-      gsap.set(slides.slice(1), { autoAlpha: 0, y: 36 });
-      const tl = gsap.timeline({ scrollTrigger: { trigger: root.current, start: "top top", end: "+=2200", scrub: 0.7, pin: true, anticipatePin: 1 } });
-      slides.slice(0, -1).forEach((slide, index) => {
-        const next = slides[index + 1];
-        const at = index * 0.34 + 0.23;
-        tl.to(slide, { autoAlpha: 0, y: -36, duration: 0.16 }, at).to(next, { autoAlpha: 1, y: 0, duration: 0.2 }, at + 0.05);
+      q(".service-scene").forEach((scene) => {
+        const copy = scene.querySelector(".service-copy");
+        const demo = scene.querySelector(".service-demo");
+        gsap.fromTo(copy, { autoAlpha: 0, y: 26 }, { autoAlpha: 1, y: 0, duration: 0.55, ease: "power2.out", scrollTrigger: { trigger: scene, start: "top 72%", once: true } });
+        gsap.fromTo(demo, { clipPath: "inset(0 0 100% 0)" }, { clipPath: "inset(0 0 0% 0)", duration: 0.65, ease: "power2.out", scrollTrigger: { trigger: scene, start: "top 68%", once: true } });
       });
-      tl.from(q(".service-scene .service-demo"), { clipPath: "inset(0 0 100% 0)", stagger: 0.08, duration: 0.32 }, 0);
     }, root);
     return () => context.revert();
   }, []);
   return <section ref={root} id="systems" className="service-showcase" aria-labelledby="services-title">
     <div className="showcase-label"><span>02 / SERVICES</span><span>APTUS DEMO INTERFACES</span></div>
     <h2 id="services-title" className="sr-only">APTUS 서비스</h2>
-    {scenes.map((scene, index) => <article className={`service-scene scene-${scene.kind}`} key={scene.number}>
+    {scenes.map((scene) => <article className={`service-scene scene-${scene.kind}`} key={scene.number}>
       <div className="service-copy"><p>{scene.eyebrow} / {scene.number}</p><h3>{scene.title}</h3><span className="service-scope">{scene.scope}</span><div className="service-features">{scene.features.map((feature) => <span key={feature}>{feature}</span>)}</div><p className="service-text">{scene.text}</p><button className="system-button" type="button" onClick={open}>이 서비스로 상담하기 ↗</button></div>
       <div className="service-demo"><Demo kind={scene.kind} /><small>APTUS INTERNAL DEMO / NOT A CLIENT PROJECT</small></div>
-      <div className="scene-progress" aria-hidden="true">{scenes.map((item, progressIndex) => <span className={progressIndex === index ? "active" : ""} key={item.number}>{item.number}</span>)}</div>
+      <div className="scene-progress" aria-hidden="true"><span>SCENE</span><b>{scene.number} / 03</b></div>
     </article>)}
+    <style jsx global>{`
+      .service-showcase{min-height:auto;padding:120px 7vw;background:var(--sys-bg);overflow:visible}
+      .showcase-label{position:static;max-width:1240px;margin:0 auto 44px;display:flex;justify-content:space-between;color:var(--sys-muted);font:10px var(--font-mono);letter-spacing:.12em}
+      .service-scene{position:relative;inset:auto;display:grid;min-height:620px;max-width:1240px;margin:auto;padding:88px 0;grid-template-columns:minmax(300px,.76fr) minmax(500px,1.25fr);gap:8vw;align-items:center;opacity:1;visibility:visible;background:transparent;border-top:1px solid var(--sys-line)}
+      .service-scene:last-of-type{border-bottom:1px solid var(--sys-line)}
+      .scene-phone .service-copy{order:2}.scene-phone .service-demo{order:1;background:var(--sys-soft)}.scene-transform .service-demo{background:var(--sys-bg)}
+      .scene-progress{position:absolute;right:0;bottom:26px;display:flex;gap:10px;color:var(--sys-muted);font:10px var(--font-mono)}.scene-progress b{color:var(--sys-ink);font-weight:400}
+      .service-copy h3{max-width:6ch;word-break:keep-all}.service-demo{min-height:500px}
+      @media(max-width:820px){.service-showcase{padding:74px 20px 0}.showcase-label{margin-bottom:28px;font-size:8px}.service-scene,.scene-phone .service-copy,.scene-phone .service-demo{display:block;min-height:0;padding:76px 0 64px;opacity:1!important;visibility:visible!important}.service-scene+.service-scene{border-top:1px solid var(--sys-line)}.scene-progress{display:none}.service-demo{min-height:360px;margin-top:38px}.scene-phone .service-copy{order:initial}.scene-phone .service-demo{order:initial}.service-copy h3{max-width:7ch}}
+    `}</style>
   </section>;
 }
