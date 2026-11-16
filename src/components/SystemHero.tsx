@@ -26,15 +26,13 @@ export default function SystemHero() {
       parts.forEach((part, index) => gsap.set(part, { ...offsets[index], transformOrigin: "50% 50%" }));
       gsap.set(wordmark, { autoAlpha: 0, clipPath: "inset(0 100% 0 0)" });
       gsap.set(select("#logo-divider"), { autoAlpha: 0, scaleY: 0, transformOrigin: "top" });
-      gsap.set(select(".hero-manifesto"), { autoAlpha: 0, y: 18 });
-      gsap.set(select(".assembly-actions"), { autoAlpha: 0, y: 12 });
       gsap.set(select(".logo-guide"), { autoAlpha: 0.72, scaleX: 1 });
 
       const sequence = gsap.timeline({
         scrollTrigger: {
           trigger: root.current,
           start: "top top",
-          end: desktop ? "+=950" : "+=460",
+          end: desktop ? "+=560" : "+=320",
           scrub: 0.65,
           ...(desktop ? { pin: true, anticipatePin: 1 } : {}),
         },
@@ -43,12 +41,10 @@ export default function SystemHero() {
       sequence
         .to(parts, { x: 0, y: 0, rotation: 0, duration: 0.3, ease: "power2.inOut" }, 0)
         .to(select(".logo-guide"), { autoAlpha: 0, scaleX: 0.4, duration: 0.16 }, 0.22)
-        .to(wordmark, { autoAlpha: 1, clipPath: "inset(0 0% 0 0)", duration: 0.22 }, 0.48)
+        .to(wordmark, { autoAlpha: 1, clipPath: "inset(0 0% 0 0)", duration: 0.22 }, 0.38)
         .to(select("#logo-divider"), { autoAlpha: 1, scaleY: 1, duration: 0.15 }, 0.5)
-        .to(select(".hero-manifesto"), { autoAlpha: 1, y: 0, duration: 0.22 }, 0.58)
-        .to(select(".assembly-actions"), { autoAlpha: 1, y: 0, duration: 0.18 }, 0.65)
-        .to(select(".aptus-logo"), { scale: desktop ? 0.7 : 0.82, y: desktop ? -18 : -38, duration: 0.22, ease: "power2.inOut" }, 0.76)
-        .to(select(".hero-manifesto"), { y: desktop ? -22 : -10, duration: 0.2 }, 0.76);
+        .to(select(".aptus-logo"), { scale: desktop ? 0.78 : 0.88, y: desktop ? -12 : -28, duration: 0.24, ease: "power2.inOut" }, 0.64)
+        .to(select(".hero-manifesto"), { y: desktop ? -12 : -6, duration: 0.18 }, 0.64);
     }, root);
     return () => context.revert();
   }, []);
