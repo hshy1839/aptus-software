@@ -21,10 +21,11 @@ export const metadata: Metadata = {
 };
 
 const colors = [
-  ["White", "#FFFFFF", "#FFFFFF"],
-  ["Off white", "#F7F8FA", "#F7F8FA"],
-  ["Black", "#101010", "#101010"],
-  ["Border", "#D4D4D4", "#D4D4D4"],
+  ["Canvas", "#F7F8FA", "#F7F8FA"],
+  ["Surface", "#FFFFFF", "#FFFFFF"],
+  ["Ink", "#101418", "#101418"],
+  ["Graphite", "#2A3138", "#2A3138"],
+  ["Structural line", "#C9D0D7", "#C9D0D7"],
 ] as const;
 
 export default function DesignSystemPage() {
@@ -35,23 +36,23 @@ export default function DesignSystemPage() {
     <main className="ds-page">
       <header>
         <span>APTUS / DESIGN FOUNDATION</span>
-        <span>V6.0 / INTERNAL</span>
+        <span>V7.0 / INTERNAL</span>
       </header>
 
       <section className="ds-intro">
         <div className="ds-logo"><AptusLogo /></div>
-        <EyebrowLabel>01 — A QUIET, PRECISE SYSTEM</EyebrowLabel>
+        <EyebrowLabel>01 — ALIGN / CUT / ASSEMBLE</EyebrowLabel>
         <h1>ALIGN.<br />CUT.<br />ASSEMBLE.</h1>
-        <p className="ds-copy">A restrained visual foundation for digital products: geometric, calm and engineered for clear communication.</p>
+        <p className="ds-copy">A quiet corporate system for digital products. Structure gives content a place. The cut creates a distinct APTUS signature. Assembly explains progress without delaying action.</p>
       </section>
 
       <section id="colors">
         <EyebrowLabel>02 — COLOR SYSTEM</EyebrowLabel>
         <div className="ds-grid">
-          <SectionHeading>Monochrome, with room to think.</SectionHeading>
+          <SectionHeading>White space carries confidence.</SectionHeading>
           <div className="ds-swatches">
             {colors.map(([name, value, color]) => (
-              <div key={name} style={{ background: color, color: value === "#101010" ? "#fff" : "#101010" }}>
+              <div key={name} style={{ background: color, color: value === "#101418" || value === "#2A3138" ? "#fff" : "#101418" }}>
                 <span>{name}</span><span>{value}</span>
               </div>
             ))}
@@ -61,11 +62,11 @@ export default function DesignSystemPage() {
 
       <section id="typography">
         <EyebrowLabel>03 — TYPOGRAPHY</EyebrowLabel>
-        <p className="type-xl">Systems that stay clear.</p>
+        <p className="type-xl">Ideas become<br />working systems.</p>
         <PrecisionDivider />
         <p className="type-l">Designed for what&apos;s next.</p>
-        <p className="type-m">본문은 충분한 행간과 절제된 대비로, 복잡한 내용을 조용하고 정확하게 전달합니다.</p>
-        <p className="type-meta">METADATA / IBM PLEX MONO / 10 PX</p>
+        <p className="type-m">한글 제목은 충분한 줄 간격과 제한된 행 길이로 사용합니다. 본문은 읽기 속도와 서비스 이해를 우선하며, 영문 모노 라벨은 구조와 상태를 보조합니다.</p>
+        <p className="type-meta">DISPLAY / GEIST · BODY / PRETENDARD · META / IBM PLEX MONO</p>
       </section>
 
       <section id="grid">
@@ -77,7 +78,7 @@ export default function DesignSystemPage() {
 
       <section id="components">
         <EyebrowLabel>05 — UI COMPONENTS</EyebrowLabel>
-        <SectionHeading>Purposeful controls.</SectionHeading>
+        <SectionHeading>Controls make intent obvious.</SectionHeading>
         <div className="ds-buttons">
           <PrimaryButton type="button">Start a project</PrimaryButton>
           <SecondaryButton type="button">View capability</SecondaryButton>
@@ -86,24 +87,24 @@ export default function DesignSystemPage() {
       </section>
 
       <section id="align">
-        <EyebrowLabel>06 — ALIGN</EyebrowLabel>
+        <EyebrowLabel>06 — ALIGN / STRUCTURE</EyebrowLabel>
         <ImageRevealFrame><span>STRUCTURE / 01</span></ImageRevealFrame>
       </section>
 
       <section id="cut">
-        <EyebrowLabel>07 — CUT</EyebrowLabel>
+        <EyebrowLabel>07 — CUT / SIGNATURE</EyebrowLabel>
         <DiagonalMask><span>PRECISION / 02</span></DiagonalMask>
       </section>
 
       <section id="assemble">
-        <EyebrowLabel>08 — ASSEMBLE</EyebrowLabel>
+        <EyebrowLabel>08 — ASSEMBLE / MOTION</EyebrowLabel>
         <div className="ds-assemble" aria-label="Three APTUS mark components assembling"><i /><i /><i /></div>
       </section>
 
       <section id="responsive">
-        <EyebrowLabel>09 — RESPONSIVE LAYOUT</EyebrowLabel>
-        <SectionHeading>One system, three clear scales.</SectionHeading>
-        <p className="ds-copy">The layout condenses from twelve to eight and then four columns without sacrificing hierarchy, touch targets or breathing room.</p>
+        <EyebrowLabel>09 — RESPONSIVE RULES</EyebrowLabel>
+        <SectionHeading>One system, three intentional scales.</SectionHeading>
+        <p className="ds-copy">Desktop uses disciplined composition. Tablet protects reading measures. Mobile removes pins, preserves actions and replaces spatial complexity with a clear vertical story.</p>
       </section>
     </main>
   );
