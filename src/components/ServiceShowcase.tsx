@@ -25,13 +25,37 @@ export default function ServiceShowcase() {
   useLayoutEffect(() => {
     const context = gsap.context(() => {
       if (window.matchMedia("(max-width: 820px), (prefers-reduced-motion: reduce)").matches) return;
-      const q = gsap.utils.selector(root);
-      q(".service-scene").forEach((scene) => {
-        const copy = scene.querySelector(".service-copy");
-        const demo = scene.querySelector(".service-demo");
-        gsap.fromTo(copy, { autoAlpha: 0, y: 26 }, { autoAlpha: 1, y: 0, duration: 0.55, ease: "power2.out", scrollTrigger: { trigger: scene, start: "top 72%", once: true } });
-        gsap.fromTo(demo, { clipPath: "inset(0 0 100% 0)" }, { clipPath: "inset(0 0 0% 0)", duration: 0.65, ease: "power2.out", scrollTrigger: { trigger: scene, start: "top 68%", once: true } });
+      const element = root.current;
+      if (!element) return;
+      const scenes = Array.from(element.querySelectorAll<HTMLElement>(".service-scene"));
+      const [web, mobile, packageScene] = scenes;
+      if (!web || !mobile || !packageScene) return;
+
+      gsap.set(scenes, { autoAlpha: 1 });
+      gsap.set([mobile, packageScene], { xPercent: 104 });
+      const webDemo = web.querySelector(".service-demo");
+      if (!webDemo) return;
+      gsap.set(webDemo, { clipPath: "inset(0 0 100% 0)" });
+
+      const sequence = gsap.timeline({
+        scrollTrigger: {
+          trigger: root.current,
+          start: "top top",
+          end: "+=1800",
+          scrub: 0.7,
+          pin: true,
+          anticipatePin: 1,
+        },
       });
+
+      sequence
+        .to(webDemo, { clipPath: "inset(0 0 0% 0)", duration: 0.16, ease: "power2.out" }, 0)
+        .to(web, { xPercent: -104, autoAlpha: 0, duration: 0.16, ease: "power2.inOut" }, 0.31)
+        .to(mobile, { xPercent: 0, duration: 0.2, ease: "power2.inOut" }, 0.31)
+        .fromTo(mobile.querySelector(".service-demo"), { clipPath: "inset(0 0 100% 0)" }, { clipPath: "inset(0 0 0% 0)", duration: 0.16, ease: "power2.out" }, 0.4)
+        .to(mobile, { xPercent: -104, autoAlpha: 0, duration: 0.16, ease: "power2.inOut" }, 0.65)
+        .to(packageScene, { xPercent: 0, duration: 0.2, ease: "power2.inOut" }, 0.65)
+        .fromTo(packageScene.querySelector(".service-demo"), { clipPath: "inset(0 0 100% 0)" }, { clipPath: "inset(0 0 0% 0)", duration: 0.16, ease: "power2.out" }, 0.74);
     }, root);
     return () => context.revert();
   }, []);
@@ -44,14 +68,14 @@ export default function ServiceShowcase() {
       <div className="scene-progress" aria-hidden="true"><span>SCENE</span><b>{scene.number} / 03</b></div>
     </article>)}
     <style jsx global>{`
-      .service-showcase{min-height:auto;padding:120px 7vw;background:var(--sys-bg);overflow:visible}
-      .showcase-label{position:static;max-width:1240px;margin:0 auto 44px;display:flex;justify-content:space-between;color:var(--sys-muted);font:10px var(--font-mono);letter-spacing:.12em}
-      .service-scene{position:relative;inset:auto;display:grid;min-height:100svh;max-width:1240px;margin:auto;padding:88px 0;grid-template-columns:minmax(300px,.76fr) minmax(500px,1.25fr);gap:8vw;align-items:center;opacity:1;visibility:visible;background:transparent;border-top:1px solid var(--sys-line)}
-      .service-scene:last-of-type{border-bottom:1px solid var(--sys-line)}
+      .service-showcase{position:relative;min-height:100svh;padding:0;background:var(--sys-bg);overflow:hidden}
+      .showcase-label{position:absolute;z-index:5;top:32px;left:7vw;right:7vw;display:flex;justify-content:space-between;color:var(--sys-muted);font:10px var(--font-mono);letter-spacing:.12em}
+      .service-scene{position:absolute;inset:0;display:grid;min-height:100svh;max-width:none;margin:0;padding:128px 7vw 82px;grid-template-columns:minmax(300px,.76fr) minmax(500px,1.25fr);gap:8vw;align-items:center;opacity:1;visibility:visible;background:var(--sys-bg);border-top:0}
+      .service-scene:last-of-type{border-bottom:0}
       .scene-phone .service-copy{order:2}.scene-phone .service-demo{order:1;background:var(--sys-soft)}.scene-transform .service-demo{background:var(--sys-bg)}
       .scene-progress{position:absolute;right:0;bottom:26px;display:flex;gap:10px;color:var(--sys-muted);font:10px var(--font-mono)}.scene-progress b{color:var(--sys-ink);font-weight:400}
       .service-copy h3{max-width:6ch;word-break:keep-all}.service-demo{min-height:500px}
-      @media(max-width:820px){.service-showcase{padding:74px 20px 0}.showcase-label{margin-bottom:28px;font-size:8px}.service-scene,.scene-phone .service-copy,.scene-phone .service-demo{display:block;min-height:0;padding:76px 0 64px;opacity:1!important;visibility:visible!important}.service-scene+.service-scene{border-top:1px solid var(--sys-line)}.scene-progress{display:none}.service-demo{min-height:360px;margin-top:38px}.scene-phone .service-copy{order:initial}.scene-phone .service-demo{order:initial}.service-copy h3{max-width:7ch}}
+      @media(max-width:820px){.service-showcase{padding:74px 20px 0;min-height:auto;overflow:visible}.showcase-label{position:static;margin-bottom:28px;font-size:8px}.service-scene,.scene-phone .service-copy,.scene-phone .service-demo{position:relative;inset:auto;display:block;min-height:0;padding:76px 0 64px;opacity:1!important;visibility:visible!important;transform:none!important}.service-scene+.service-scene{border-top:1px solid var(--sys-line)}.scene-progress{display:none}.service-demo{min-height:360px;margin-top:38px}.scene-phone .service-copy{order:initial}.scene-phone .service-demo{order:initial}.service-copy h3{max-width:7ch}}
     `}</style>
   </section>;
 }
